@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07152f">
+  <title>GFX TRADE CONNECT — Connect. Share. Grow.</title>
+  <meta name="description" content="A community for traders to share their journeys, ideas, lessons and analysis.">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{--bg:#071225;--panel:#0d1c36;--panel2:#102443;--line:#203657;--blue:#4b8dff;--blue2:#2563eb;--text:#f3f7ff;--muted:#a8b7d0;--green:#4adea4;--danger:#ff9292;--shadow:0 22px 60px #0005}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#12346a66,transparent 40%),radial-gradient(ellipse at 95% 35%,#1d4ed822,transparent 32%),var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(#7195cb18 1px,transparent 1px),linear-gradient(90deg,#7195cb18 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+    button,input,textarea{font:inherit}button{cursor:pointer}.wrap{width:min(1120px,calc(100% - 32px));margin:auto;position:relative}
+    header{position:sticky;top:0;z-index:10;border-bottom:1px solid #ffffff12;background:#071225e8;backdrop-filter:blur(18px)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:11px;color:var(--text);text-decoration:none;font-weight:850;letter-spacing:.035em}.logo{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(140deg,#75aaff,#2563eb 65%,#123b99);box-shadow:0 7px 25px #2563eb55;color:white;font-weight:900}.brand small{display:block;font-size:10px;color:#91a8ce;letter-spacing:.19em;margin-top:-3px}.navlinks{display:flex;align-items:center;gap:20px}.navlinks a{color:var(--muted);text-decoration:none;font-size:14px}.navlinks a:hover{color:white}.btn{border:1px solid transparent;border-radius:12px;padding:11px 16px;font-weight:750;transition:.18s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}.btn-primary{background:linear-gradient(135deg,#5798ff,#2563eb);color:white;box-shadow:0 8px 25px #2563eb30}.btn-primary:hover{transform:translateY(-1px);filter:brightness(1.08)}.btn-ghost{background:#ffffff08;border-color:#ffffff22;color:var(--text)}.btn-ghost:hover{background:#ffffff12}.btn-small{padding:8px 12px;font-size:13px}.hero{padding:78px 0 48px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:48px}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid #4b8dff44;border-radius:99px;color:#bcd4ff;background:#2563eb15;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px #4adea4}.hero h1{font-size:clamp(42px,6vw,70px);line-height:1.02;letter-spacing:-.055em;margin:22px 0}.hero h1 span{color:#8bb8ff;position:relative}.hero h1 span:after{content:"";position:absolute;left:0;bottom:-7px;width:64%;height:3px;border-radius:9px;background:linear-gradient(90deg,#60a5fa,transparent)}.hero p{font-size:18px;color:var(--muted);max-width:560px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0 18px}.micro{font-size:12px;color:#8398ba}.preview{position:relative;border:1px solid #ffffff20;border-radius:24px;padding:20px;background:linear-gradient(145deg,#122849ed,#0b1730ed);box-shadow:var(--shadow);overflow:hidden}.preview:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-120px;top:-130px;background:#2563eb35;filter:blur(4px)}.preview-top{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #ffffff13;padding-bottom:15px;margin-bottom:16px}.preview-title{font-weight:800}.pill{border:1px solid #4b8dff55;background:#2563eb1b;color:#b9d3ff;padding:5px 9px;border-radius:99px;font-size:11px;font-weight:750}.post{position:relative;background:#09172d;border:1px solid #ffffff12;border-radius:16px;padding:15px;margin:12px 0}.posthead{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;flex:none;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#244f91,#142a4d);font-weight:850;color:#d9e8ff}.who{font-weight:750;font-size:13px}.sub{font-size:11px;color:#8298ba}.verified{color:#82b6ff}.post p{font-size:13px;color:#c4d1e5;margin:12px 0}.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{font-size:10px;color:#9eb5d7;background:#ffffff08;border:1px solid #ffffff10;padding:4px 7px;border-radius:7px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}.stat{padding:12px;border-radius:12px;background:#ffffff06;border:1px solid #ffffff10}.stat strong{display:block;font-size:18px}.stat span{font-size:10px;color:var(--muted)}section{padding:52px 0}.section-head{text-align:center;max-width:650px;margin:0 auto 28px}.section-head h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.035em;margin:0 0 9px}.section-head p{color:var(--muted);margin:0}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{padding:23px;border:1px solid #ffffff14;border-radius:18px;background:linear-gradient(145deg,#10213c,#0b1830);position:relative;overflow:hidden}.feature:after{content:"";position:absolute;right:-35px;top:-50px;width:120px;height:120px;border-radius:50%;background:#2563eb14}.icon{width:42px;height:42px;border-radius:13px;background:#2563eb25;border:1px solid #4b8dff3b;display:grid;place-items:center;color:#9bc4ff;font-size:20px}.feature h3{margin:15px 0 6px}.feature p{margin:0;color:var(--muted);font-size:14px}.cta{padding:32px;border:1px solid #4b8dff45;border-radius:22px;background:radial-gradient(ellipse at 85% 0%,#2563eb30,transparent 42%),linear-gradient(135deg,#10264a,#0b1830);display:flex;align-items:center;justify-content:space-between;gap:24px;overflow:hidden}.cta h2{font-size:30px;margin:0 0 6px}.cta p{color:var(--muted);margin:0}.disclaimer{font-size:12px;color:#8295b2;border-top:1px solid #ffffff12;padding:20px 0 30px;margin-top:40px}.hidden{display:none!important}
+    /* app */
+    .app-section{padding-top:30px}.app-layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start}.side,.card{background:#0c1b34;border:1px solid #ffffff15;border-radius:18px;padding:19px}.side{position:sticky;top:96px}.side h3{margin:0 0 8px}.muted{color:var(--muted)}.small{font-size:12px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:13px;color:#c3d1e5;font-weight:700}.field input,.field textarea{width:100%;border:1px solid #2a4164;border-radius:10px;background:#07152a;color:white;padding:12px;outline:none}.field input:focus,.field textarea:focus{border-color:#5798ff;box-shadow:0 0 0 3px #2563eb20}.field textarea{min-height:105px;resize:vertical}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.status{padding:11px 13px;border-radius:10px;margin:12px 0;font-size:13px;background:#ffffff0a;color:#c4d1e5;border:1px solid #ffffff12}.status.error{color:#ffc1c1;border-color:#ff777744;background:#ff77740d}.status.good{color:#a8f3d3;border-color:#4adea444;background:#4adea40d}.feedtop{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.feedtop h2{margin:0}.composer{margin-bottom:15px}.composer textarea{min-height:95px}.post-live{margin:14px 0}.post-live .posthead{margin-bottom:8px}.post-live p{white-space:pre-wrap;overflow-wrap:anywhere}.post-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #ffffff10;padding-top:10px;margin-top:10px}.auth-card{max-width:510px;margin:30px auto}.auth-tabs{display:flex;gap:8px;margin-bottom:18px}.auth-tabs button{flex:1}.userline{display:flex;align-items:center;gap:9px}.empty{text-align:center;padding:28px 15px;color:var(--muted);border:1px dashed #ffffff20;border-radius:14px}.footerlinks{display:flex;gap:14px;flex-wrap:wrap}.footerlinks a{color:#8fa7ca;text-decoration:none;font-size:12px}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:52px;gap:28px}.preview{max-width:600px}.grid3{grid-template-columns:1fr}.app-layout{grid-template-columns:1fr}.side{position:static}.navlinks a:not(.btn){display:none}.cta{align-items:flex-start;flex-direction:column}.hero h1{font-size:clamp(42px,12vw,64px)}section{padding:38px 0}}
+    @media(max-width:480px){.wrap{width:min(100% - 22px,1120px)}.nav{height:68px}.brand{font-size:13px}.logo{width:36px;height:36px}.navlinks{gap:8px}.navlinks .btn{padding:9px 11px;font-size:12px}.hero p{font-size:16px}.preview{padding:13px}.formrow{grid-template-columns:1fr}.cta{padding:22px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="GFX Trade Connect home"><span class="logo">GFX</span><span>GFX TRADE CONNECT<small>CONNECT. SHARE. GROW.</small></span></a>
+    <nav class="navlinks">
+      <a href="#community">Community</a><a href="#about">About</a>
+      <button class="btn btn-ghost btn-small" id="navLogin">Log in</button>
+      <button class="btn btn-primary btn-small" id="navJoin">Join free</button>
+      <button class="btn btn-ghost btn-small hidden" id="navAccount">My account</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div id="marketing">
+    <section class="wrap hero" id="home">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> A community built for traders</span>
+        <h1>Trading grows<br>when we <span>connect.</span></h1>
+        <p>A place to share your trading journey, exchange ideas, learn from experience and grow with a community that values process—not hype.</p>
+        <div class="actions"><button class="btn btn-primary" id="heroJoin">Join the community <span>→</span></button><a class="btn btn-ghost" href="#community">Explore the vision</a></div>
+        <div class="micro">Education and discussion first. No guaranteed profits. No fake promises.</div>
+      </div>
+      <div class="preview" aria-label="Sample community feed preview">
+        <div class="preview-top"><div><div class="preview-title">Community snapshot</div><div class="sub">Ideas. Lessons. Real journeys.</div></div><span class="pill">PREVIEW</span></div>
+        <article class="post"><div class="posthead"><div class="avatar">AM</div><div><div class="who">A. Martins <span class="verified">✓</span></div><div class="sub">Market journal · 12 min ago</div></div></div><p>Today I waited for price to return to my marked zone instead of chasing the move. Sharing the process matters as much as the result.</p><div class="tags"><span class="tag">Trading journal</span><span class="tag">Process first</span></div></article>
+        <article class="post"><div class="posthead"><div class="avatar">K</div><div><div class="who">Kemi Trades</div><div class="sub">Learning notes · 35 min ago</div></div></div><p>One lesson from this week: write down the reason for entry before opening a position. Review it after the trade closes.</p><div class="tags"><span class="tag">Education</span><span class="tag">Risk awareness</span></div></article>
+        <div class="stats"><div class="stat"><strong>Share</strong><span>your journey</span></div><div class="stat"><strong>Learn</strong><span>from others</span></div><div class="stat"><strong>Grow</strong><span>with purpose</span></div></div>
+      </div>
+    </section>
+    <section id="community" class="wrap">
+      <div class="section-head"><h2>More than a signal group.</h2><p>A community for the full trading journey—from learning the basics to documenting a tested process.</p></div>
+      <div class="grid3">
+        <article class="feature"><div class="icon">↗</div><h3>Share your journey</h3><p>Post trading lessons, journal entries, market observations and thoughtful questions.</p></article>
+        <article class="feature"><div class="icon">◎</div><h3>Learn together</h3><p>Discuss setups and ideas openly, while remembering that every trader is responsible for their own decisions.</p></article>
+        <article class="feature"><div class="icon">✓</div><h3>Trust with transparency</h3><p>Trader verification will be reviewed separately. A badge is not a guarantee of performance or future results.</p></article>
+      </div>
+    </section>
+    <section id="about" class="wrap">
+      <div class="cta"><div><h2>Connect. Share. Grow.</h2><p>Start building your trading community profile today.</p></div><button class="btn btn-primary" id="ctaJoin">Create your account →</button></div>
+      <div class="disclaimer">GFX TRADE CONNECT is a community platform, not a broker, investment adviser, or promise of profit. Trading involves substantial risk. Verify information independently and never share account passwords or broker credentials.</div>
+    </section>
+  </div>
+
+  <section id="authSection" class="wrap hidden">
+    <div class="card auth-card">
+      <div class="section-head" style="margin-bottom:20px"><h2 id="authTitle">Join GFX TRADE CONNECT</h2><p id="authSubtitle">Create an account to join the community.</p></div>
+      <div class="auth-tabs"><button class="btn btn-primary" id="tabSignup">Sign up</button><button class="btn btn-ghost" id="tabLogin">Log in</button></div>
+      <form id="authForm">
+        <div id="signupFields">
+          <div class="field"><label for="displayName">Display name</label><input id="displayName" autocomplete="name" maxlength="60" placeholder="How should people know you?" required></div>
+          <div class="field"><label for="username">Username</label><input id="username" autocomplete="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" placeholder="e.g. GFXTrader" required><span class="small muted">3–24 characters: letters, numbers and underscores.</span></div>
+        </div>
+        <div class="field"><label for="email">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+        <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters"></div>
+        <button class="btn btn-primary" style="width:100%" id="authSubmit" type="submit">Create account</button>
+      </form>
+      <div id="authMessage" class="status hidden" role="status"></div>
+      <p class="small muted">By joining, you agree to be respectful, avoid misleading claims, and never impersonate another trader. Community terms and privacy details should be finalized before public launch.</p>
+      <button class="btn btn-ghost btn-small" id="backHome">← Back to homepage</button>
+    </div>
+  </section>
+
+  <section id="appSection" class="wrap app-section hidden">
+    <div class="feedtop"><div><span class="eyebrow"><span class="dot"></span> Member space</span><h1 style="font-size:clamp(28px,5vw,42px);margin:12px 0 0">Your community</h1></div><button class="btn btn-ghost btn-small" id="logoutBtn">Log out</button></div>
+    <div class="app-layout">
+      <aside class="side">
+        <div class="userline"><div class="avatar" id="profileAvatar">G</div><div><div class="who" id="profileHeading">Your profile</div><div class="sub" id="profileEmail"></div></div></div>
+        <div class="status good" id="memberStatus">Community member</div>
+        <h3>Profile details</h3>
+        <form id="profileForm">
+          <div class="field"><label for="editDisplayName">Display name</label><input id="editDisplayName" maxlength="60" required></div>
+          <div class="field"><label for="editUsername">Username</label><input id="editUsername" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" required></div>
+          <div class="field"><label for="bio">Short bio</label><textarea id="bio" maxlength="400" placeholder="What are you learning or interested in?"></textarea></div>
+          <div class="field"><label for="interests">Trading interests</label><input id="interests" maxlength="180" placeholder="e.g. Forex, risk management"></div>
+          <button class="btn btn-ghost" type="submit" style="width:100%">Save profile</button>
+        </form>
+        <div id="profileMessage" class="status hidden" role="status"></div>
+      </aside>
+      <div>
+        <div class="card composer">
+          <h2 style="margin:0 0 5px">Share with the community</h2><p class="muted small" style="margin-top:0">Post a lesson, journal entry or market observation. Avoid sharing private account information.</p>
+          <form id="postForm">
+            <div class="field"><label for="postType">Post type</label><select id="postType" style="width:100%;border:1px solid #2a4164;border-radius:10px;background:#07152a;color:white;padding:12px"><option value="journey">Trading journey</option><option value="education">Education / lesson</option><option value="analysis">Market analysis</option><option value="question">Question / discussion</option><option value="journal">Trading journal</option></select></div>
+            <div class="field"><label for="postBody">Your post</label><textarea id="postBody" minlength="3" maxlength="3000" required placeholder="What would you like to share?"></textarea></div>
+            <div class="field"><label style="display:flex;gap:9px;align-items:flex-start;font-weight:500"><input id="whatsappOptIn" type="checkbox" style="width:auto;margin-top:4px"> I want to receive WhatsApp updates in the future (optional). This prototype does not send WhatsApp messages.</label></div>
+            <button class="btn btn-primary" type="submit" id="publishBtn">Publish post</button>
+          </form>
+          <div id="postMessage" class="status hidden" role="status"></div>
+        </div>
+        <div class="feedtop"><h2>Community feed</h2><button class="btn btn-ghost btn-small" id="refreshFeed">Refresh</button></div>
+        <div id="feed"><div class="empty">Loading community posts…</div></div>
+      </div>
+    </div>
+    <div class="disclaimer">Community content is user-generated and may be inaccurate. This prototype does not yet support trader verification, trade-alert permissions, moderation tools or WhatsApp delivery.</div>
+  </section>
+</main>
+<script>
+(() => {
+  // IMPORTANT: replace these two placeholders with your Supabase Project URL and Publishable key.
+  // A publishable/anon key can be used in a browser only with proper RLS policies.
+  // NEVER place an sb_secret_ or service_role key in this file.
+  const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+  const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+
+  const $ = (id) => document.getElementById(id);
+  const marketing = $("marketing"), authSection = $("authSection"), appSection = $("appSection");
+  let supabase = null, mode = "signup", currentProfile = null;
+
+  function message(id, text, type="") {
+    const el = $(id); el.textContent = text; el.className = "status" + (type ? " " + type : "");
+    el.classList.remove("hidden");
+  }
+  function hideMessage(id){ $(id).classList.add("hidden"); }
+  function showView(view) {
+    marketing.classList.toggle("hidden", view !== "home");
+    authSection.classList.toggle("hidden", view !== "auth");
+    appSection.classList.toggle("hidden", view !== "app");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function setMode(next) {
+    mode = next;
+    $("signupFields").classList.toggle("hidden", mode !== "signup");
+    $("authTitle").textContent = mode === "signup" ? "Join GFX TRADE CONNECT" : "Welcome back";
+    $("authSubtitle").textContent = mode === "signup" ? "Create an account to join the community." : "Log in to your GFX TRADE CONNECT account.";
+    $("authSubmit").textContent = mode === "signup" ? "Create account" : "Log in";
+    $("tabSignup").className = "btn " + (mode === "signup" ? "btn-primary" : "btn-ghost");
+    $("tabLogin").className = "btn " + (mode === "login" ? "btn-primary" : "btn-ghost");
+    $("displayName").required = mode === "signup"; $("username").required = mode === "signup";
+    hideMessage("authMessage");
+  }
+  function openAuth(next="signup") { setMode(next); showView("auth"); }
+  function initials(s) { return (s || "G").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase(); }
+  function safeText(s) { return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+  function ago(date) {
+    const ms = Date.now() - new Date(date).getTime(); if (!Number.isFinite(ms) || ms < 0) return "just now";
+    const m=Math.floor(ms/60000); if(m<1)return "just now"; if(m<60)return `${m} min ago`;
+    const h=Math.floor(m/60); if(h<24)return `${h} hr ago`; return `${Math.floor(h/24)} day(s) ago`;
+  }
+  function configReady() {
+    return SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && SUPABASE_PUBLISHABLE_KEY && !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_");
+  }
+  async function boot() {
+    if (!configReady()) {
+      $("navLogin").addEventListener("click",()=>openAuth("login"));
+      $("navJoin").addEventListener("click",()=>openAuth("signup"));
+      $("heroJoin").addEventListener("click",()=>openAuth("signup"));
+      $("ctaJoin").addEventListener("click",()=>openAuth("signup"));
+      $("tabSignup").addEventListener("click",()=>setMode("signup"));
+      $("tabLogin").addEventListener("click",()=>setMode("login"));
+      $("backHome").addEventListener("click",()=>showView("home"));
+      $("authForm").addEventListener("submit",e=>{e.preventDefault();message("authMessage","Add your Supabase Project URL and Publishable key in the script section before using accounts.","error");});
+      message("authMessage","Setup needed: add your Supabase Project URL and Publishable key to this file. The demo account system is not connected yet.","");
+      return;
+    }
+    if (!window.supabase || !window.supabase.createClient) {
+      alert("Supabase library could not load. Check your internet connection and reload.");
+      return;
+    }
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    $("navLogin").addEventListener("click",()=>openAuth("login"));
+    $("navJoin").addEventListener("click",()=>openAuth("signup"));
+    $("heroJoin").addEventListener("click",()=>openAuth("signup"));
+    $("ctaJoin").addEventListener("click",()=>openAuth("signup"));
+    $("navAccount").addEventListener("click",()=>showView("app"));
+    $("tabSignup").addEventListener("click",()=>setMode("signup"));
+    $("tabLogin").addEventListener("click",()=>setMode("login"));
+    $("backHome").addEventListener("click",()=>showView("home"));
+    $("logoutBtn").addEventListener("click",async()=>{await supabase.auth.signOut();currentProfile=null;showView("home");$("navAccount").classList.add("hidden");$("navJoin").classList.remove("hidden");$("navLogin").classList.remove("hidden");});
+    $("authForm").addEventListener("submit",handleAuth);
+    $("profileForm").addEventListener("submit",saveProfile);
+    $("postForm").addEventListener("submit",publishPost);
+    $("refreshFeed").addEventListener("click",loadFeed);
+    const {data:{session}} = await supabase.auth.getSession();
+    if(session) await enterApp(session.user);
+    supabase.auth.onAuthStateChange((event,session)=>{ if(event==="SIGNED_OUT"){showView("home");} });
+  }
+  async function handleAuth(e) {
+    e.preventDefault(); hideMessage("authMessage");
+    const email=$("email").value.trim(), password=$("password").value;
+    $("authSubmit").disabled=true; $("authSubmit").textContent="Please wait…";
+    try {
+      if(mode==="signup") {
+        const username=$("username").value.trim();
+        const display_name=$("displayName").value.trim();
+        if(!/^[A-Za-z0-9_]{3,24}$/.test(username)) throw new Error("Username must be 3–24 letters, numbers or underscores.");
+        const {data,error}=await supabase.auth.signUp({email,password,options:{data:{username,display_name}}});
+        if(error) throw error;
+        if(data.session) { await enterApp(data.user); }
+        else message("authMessage","Account created. Check your email for a confirmation link, then log in. If email confirmation is disabled in Supabase, you may be logged in automatically.","good");
+      } else {
+        const {data,error}=await supabase.auth.signInWithPassword({email,password});
+        if(error) throw error;
+        await enterApp(data.user);
+      }
+    } catch(err) { message("authMessage",err.message || "Something went wrong. Please try again.","error"); }
+    finally { $("authSubmit").disabled=false; $("authSubmit").textContent=mode==="signup"?"Create account":"Log in"; }
+  }
+  async function enterApp(user) {
+    $("navAccount").classList.remove("hidden");$("navJoin").classList.add("hidden");$("navLogin").classList.add("hidden");
+    $("profileEmail").textContent=user.email||"Signed in";
+    showView("app");
+    await loadProfile(user);
+    await loadFeed();
+  }
+  async function loadProfile(user) {
+    let {data:profile,error}=await supabase.from("profiles").select("*").eq("id",user.id).maybeSingle();
+    if(error) { message("profileMessage","Could not load profile: "+error.message,"error"); return; }
+    if(!profile) {
+      const meta=user.user_metadata||{};
+      const payload={id:user.id,username:meta.username||null,display_name:meta.display_name||null};
+      const result=await supabase.from("profiles").upsert(payload).select().maybeSingle();
+      profile=result.data; error=result.error;
+      if(error){message("profileMessage","Profile setup issue: "+error.message,"error");return;}
+    }
+    currentProfile=profile;
+    $("profileHeading").textContent=profile.display_name||profile.username||"Community member";
+    $("profileAvatar").textContent=initials(profile.display_name||profile.username);
+    $("editDisplayName").value=profile.display_name||"";
+    $("editUsername").value=profile.username||"";
+    $("bio").value=profile.bio||"";
+    $("interests").value=Array.isArray(profile.trading_interests)?profile.trading_interests.join(", "):"";
+  }
+  async function saveProfile(e) {
+    e.preventDefault(); hideMessage("profileMessage");
+    const {data:{user}}=await supabase.auth.getUser(); if(!user)return;
+    const username=$("editUsername").value.trim(), display_name=$("editDisplayName").value.trim();
+    if(!/^[A-Za-z0-9_]{3,24}$/.test(username)){message("profileMessage","Username must be 3–24 letters, numbers or underscores.","error");return;}
+    const trading_interests=$("interests").value.split(",").map(s=>s.trim()).filter(Boolean).slice(0,12);
+    const {data,error}=await supabase.from("profiles").update({username,display_name,bio:$("bio").value.trim(),trading_interests,updated_at:new Date().toISOString()}).eq("id",user.id).select().single();
+    if(error){message("profileMessage",error.message.includes("duplicate")?"That username is already taken. Choose another.":error.message,"error");return;}
+    currentProfile=data;$("profileHeading").textContent=display_name||username;$("profileAvatar").textContent=initials(display_name||username);
+    message("profileMessage","Profile saved.","good");
+  }
+  async function publishPost(e) {
+    e.preventDefault(); hideMessage("postMessage");
+    const {data:{user}}=await supabase.auth.getUser(); if(!user)return;
+    const body=$("postBody").value.trim(); if(body.length<3){message("postMessage","Write a little more before publishing.","error");return;}
+    $("publishBtn").disabled=true;$("publishBtn").textContent="Publishing…";
+    const payload={author_id:user.id,body,post_type:$("postType").value};
+    const {error}=await supabase.from("posts").insert(payload);
+    $("publishBtn").disabled=false;$("publishBtn").textContent="Publish post";
+    if(error){message("postMessage","Post could not be published. Check that you ran setup.sql in Supabase. Details: "+error.message,"error");return;}
+    $("postBody").value="";message("postMessage","Your post is live in the community feed.","good");await loadFeed();
+  }
+  async function loadFeed() {
+    if(!supabase){$("feed").innerHTML='<div class="empty">Connect Supabase and configure the database to enable the feed.</div>';return;}
+    $("feed").innerHTML='<div class="empty">Loading community posts…</div>';
+    const {data,error}=await supabase.from("posts").select("id,author_id,body,post_type,created_at,profiles(username,display_name)").order("created_at",{ascending:false}).limit(50);
+    if(error){$("feed").innerHTML='<div class="empty">Feed is not ready yet. Run the supplied setup.sql in Supabase. <br><span class="small">'+safeText(error.message)+'</span></div>';return;}
+    if(!data||!data.length){$("feed").innerHTML='<div class="empty">No posts yet. Be the first to share a useful lesson or trading question.</div>';return;}
+    const labels={journey:"Trading journey",education:"Education / lesson",analysis:"Market analysis",question:"Question / discussion",journal:"Trading journal"};
+    $("feed").innerHTML=data.map(p=>{
+      const prof=Array.isArray(p.profiles)?p.profiles[0]:p.profiles;
+      const name=prof?.display_name||prof?.username||"Community member";
+      const type=labels[p.post_type]||"Community post";
+      return `<article class="card post-live"><div class="posthead"><div class="avatar">${safeText(initials(name))}</div><div><div class="who">${safeText(name)}</div><div class="sub">@${safeText(prof?.username||"member")} · ${safeText(ago(p.created_at))}</div></div><span class="pill" style="margin-left:auto">${safeText(type)}</span></div><p>${safeText(p.body)}</p><div class="post-actions"><span class="sub">Shared with the community</span>${p.author_id===currentProfile?.id?'<span class="sub">Your post</span>':''}</div></article>`;
+    }).join("");
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
